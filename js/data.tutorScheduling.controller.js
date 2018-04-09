@@ -5,7 +5,7 @@
     var myApp = angular.module("tutorScheduling");
 
     myApp.controller("dataControl", function($scope, $http, $window) {
-        $http.get('getcourses.php')
+        $http.get('php/getcourses.php')
             .then(function(response) {
                 $scope.data = response.data.value;
             }
