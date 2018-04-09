@@ -27,19 +27,18 @@
         $errorMessage .= "Please enter a password with at least four characters. ";
     }      
 	
+    //query the ID and password
     if ($isComplete) {   
-    
-        // get the hashed password from the user with the email that got entered
         $query = "SELECT HAWKID, HASHED_PSSWRD FROM USER_T WHERE HAWKID='$username';";
         $result = queryDB($query, $db);
         
         
         if (nTuples($result) == 0) {
-            // no such username
             $errorMessage .= " Username $username does not correspond to any account in the system. ";
             $isComplete = false;
         }
     }
+    //query the role of the user
     if ($isComplete){
         $permission_query =  "SELECT * FROM ROLE_T WHERE HAWKID = '$username';";
         $result_p = queryDB($permission_query, $db);
@@ -51,24 +50,27 @@
         }
     }
     
-    
+    //check password
     if ($isComplete) {            
-        // there is an account that corresponds to the email that the user entered
-		// get the hashed password for that account
 		$row = nextTuple($result);
 		$hashedpass = $row['HASHED_PSSWRD'];
 		$id = $row['HAWKID'];
 		
         if ($hashedpass != $password) {
-            // if password is incorrect
             $errorMessage .= " The password you enterered is incorrect. ";
             $isComplete = false;
         }
     }
     
+    //check role
     if ($isComplete){
         $permission_row = nextTuple($result_p);
         $permission = $permission_row['DESCRIPTION'];
+        
+        if($permission==null) {
+            $errorMessage = " Could not find the users role. ";
+            $isComplete = false; 
+        }
         
         
     }
@@ -76,9 +78,6 @@
     
          
     if ($isComplete) {   
-        // password was entered correctl
-        // start a session
-        // if the session variable 'username' is set, then we assume that the user is logged in
         session_start();
         $_SESSION['username'] = $username;
 		$_SESSION['accountid'] = $id;

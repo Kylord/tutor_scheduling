@@ -1,7 +1,7 @@
 <?php
     include_once('config.php');
     include_once('dbutils.php');
-    //get the current user from the session
+    //get the current user 
     session_start(); 
     $user = $_SESSION['username'];
     $db = connectDB($DBHost, $DBUser, $DBPassword, $DBName);

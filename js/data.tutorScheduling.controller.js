@@ -3,7 +3,7 @@
     'use strict';
 
     var myApp = angular.module("tutorScheduling");
-
+    //get a response containing the users current course list
     myApp.controller("dataControl", function($scope, $http, $window) {
         $http.get('php/getcourses.php')
             .then(function(response) {
@@ -11,17 +11,13 @@
             }
             
                 );
-
-         
         $scope.query = {};
         $scope.queryBy = "$";
-        
         $scope.menuHighlight = 0;
         
-        
+        //Route the user to a landing page based on the account type in the response
         $scope.login = function(accountDetails) {
           var accountupload = angular.copy(accountDetails);
-          
           $http.post("php/login.php", accountupload)
             .then(function (response) {
                if (response.status == 200) {
@@ -41,7 +37,6 @@
                }
             });                        
         };
-        
         
         $scope.logout = function() {
           $http.post("php/logout.php")
@@ -72,9 +67,7 @@
                }
             });                        
         };
-        
-
-    
+           
      });
 
 } )();
