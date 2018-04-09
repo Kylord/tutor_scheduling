@@ -5,11 +5,20 @@
     var myApp = angular.module("tutorScheduling");
 
     myApp.controller("dataControl", function($scope, $http, $window) {
-    
+        $http.get('getcourses.php')
+            .then(function(response) {
+                $scope.data = response.data.value;
+            }
+            
+                );
+
+         
         $scope.query = {};
         $scope.queryBy = "$";
         
         $scope.menuHighlight = 0;
+        
+        
         $scope.login = function(accountDetails) {
           var accountupload = angular.copy(accountDetails);
           
@@ -62,7 +71,8 @@
                     alert('unexpected error');
                }
             });                        
-        };       
+        };
+        
 
     
      });

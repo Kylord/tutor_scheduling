@@ -1,6 +1,6 @@
 <!DOCTYPE html>
  <html ng-app="tutorScheduling">   
-    
+	
 <head>
  <title>Tutor Scheduling App</title>
 
@@ -12,17 +12,18 @@
    <!-- an emoji stylesheet I found -->
   <link href = "https://afeld.github.io/emoji-css/emoji.css" rel = "stylesheet" >
   <!-- angular code -->
-  <script src = "js/angular.min.js" ></script>
-  <script src="js/tutorScheduling.module.js"></script>
-  <script src="js/data.tutorScheduling.controller.js"></script>
-  <script src="js/tutorScheduling.filter.js"></script>
+  <script src = "../js/angular.min.js" ></script>
+  <script src="../js/tutorScheduling.module.js"></script>
+  <script src="../js/data.tutorScheduling.controller.js"></script>
+  <script src="../js/tutorScheduling.filter.js"></script>
 </head>
 
  <body>
-  <div class="container" ng-controller = "datacontrol">
+  
 	 
-	 <div ng-include ng-init="menuHighlight = 0;" src="header.html"></div> 
-	
+	 
+   <div class="container" ng-controller = "dataControl">
+    <div ng-include ng-init="menuHighlight = 0;" src="header.html"></div> 
     <h1>This is the landing page for a student</h1>
     <div class= "row">
       <div class= "card m-2" ng-repeat = "i in data.tutorScheduling">
