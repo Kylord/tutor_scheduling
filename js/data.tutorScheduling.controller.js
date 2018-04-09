@@ -26,10 +26,14 @@
                if (response.status == 200) {
                     if (response.data.status == 'error') {
                         alert('error: ' + response.data.message);
-                    } else {
-                        // successful
-                        // send user back to home page
+                    } if (response.data.permission == 'student'){
                         $window.location.href = "landing.html";
+                    }
+                    if (response.data.permission == 'tutor'){
+                        $window.location.href = "landing_tutor.html";
+                    }
+                    if (response.data.permission == 'admin'){
+                        $window.location.href = "landing_admin,html"; 
                     }
                } else {
                     alert('unexpected error');

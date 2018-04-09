@@ -51,16 +51,16 @@
         
             <!-- username for account -->
             <div class="form-group" ng-class="{ 'text-danger': accountForm.username.$invalid && accountForm.username.$touched, 'text-success': !accountForm.username.$invalid && accountForm.username.$touched }">
-                <label class="form-control-label" for="username">Username (at least 2 characters long): </label>
+                <label class="form-control-label" for="username">Username: </label>
                 <input type="text" class="form-control" ng-class="{ 'is-invalid': accountForm.username.$invalid && accountForm.username.$touched, 'is-valid': !accountForm.username.$invalid && accountForm.username.$touched }" name="username" ng-model="account.username" ng-minlength="2" id="username" required/>
-                <div ng-show="accountForm.username.$invalid && accountForm.username.$touched" >The username must be at least two characters long</div>
+                <div ng-show="accountForm.username.$invalid && accountForm.username.$touched" > </div>
             </div>
             
             <!-- password for account -->
             <div class="form-group" ng-class="{ 'text-danger': accountForm.password.$invalid && accountForm.password.$touched, 'text-success': !accountForm.password.$invalid && accountForm.password.$touched }">
-                <label class="form-control-label" for="password">Password (at least 6 characters long; may not include anything related to hawkeyes): </label>
+                <label class="form-control-label" for="password">Password: </label>
                 <input type="password" class="form-control" ng-class="{ 'is-invalid': accountForm.password.$invalid && accountForm.password.$touched, 'is-valid': !accountForm.password.$invalid && accountForm.password.$touched }" name="password" ng-model="account.password" ng-minlength="6" id="password" required/>
-                <div ng-show="accountForm.password.$invalid && accountForm.password.$touched" >The password must be at least six characters long</div>
+                <div ng-show="accountForm.password.$invalid && accountForm.password.$touched" > </div>
             </div>
         
             <button class="btn btn-default" ng-click="login(account)" ng-disabled="accountForm.$invalid">Log in</button>
