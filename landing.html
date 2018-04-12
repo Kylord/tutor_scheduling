@@ -24,12 +24,19 @@
    </ul>  
   </nav> 
 
-   <h2>This is the landing page for a student</h2>
+   <h2>This is the landing page for a student or a student that is also a tutor</h2>
    <!-- The current users list of courses --> 
     <table ng-controller= "dataControl" border=1>
      <tr>My courses:</tr>
       <tr ng-repeat ="i in data.courses">
-       <td>{{i.COURSE_FRIENDLY}}</td>
+       <td><a href = "course_view.html">{{i.COURSE_FRIENDLY}}</a></td>
+       </tr>
+    </table>
+    <p> </p>
+    <table ng-controller= "dataControl" border=1>
+     <tr>Courses I tutor:</tr>
+      <tr ng-repeat ="j in data.courses_tutor">
+       <td><a href = "course_view.html">{{j.COURSE_FRIENDLY}}</a></td>
        </tr>
     </table>
   </div>

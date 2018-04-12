@@ -23,12 +23,10 @@
                if (response.status == 200) {
                     if (response.data.status == 'error') {
                         alert('error: ' + response.data.message);
-                    } if (response.data.permission == 'student'){
+                    } if (response.data.permission == 'student' || response.data.permission == 'tutor'){
                         $window.location.href = "landing.html";
                     }
-                    if (response.data.permission == 'tutor'){
-                        $window.location.href = "landing_tutor.html";
-                    }
+                
                     if (response.data.permission == 'admin'){
                         $window.location.href = "landing_admin.html"; 
                     }
