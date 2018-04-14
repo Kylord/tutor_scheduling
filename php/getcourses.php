@@ -16,6 +16,7 @@
     
     $result = queryDB($query, $db);
     $result_t =  queryDB($query_t, $db);
+    
 
     
     $course_list = array();
@@ -34,7 +35,7 @@
         $j++;     
     }
     
-    
+
     
     //send the response
     $response = array();

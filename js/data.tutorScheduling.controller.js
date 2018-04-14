@@ -9,6 +9,7 @@
             .then(function(response) {
                 $scope.data = response.data.value;
             }
+
             
                 );
         $scope.query = {};
@@ -65,8 +66,12 @@
                }
             });                        
         };
-           
-     });
-
+        $scope.storeCourse = function($e) {
+           var data = $e.innerText;
+           return data; 
+            
+        }; 
+        
+    });      
 } )();
         
