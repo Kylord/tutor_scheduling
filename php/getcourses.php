@@ -7,16 +7,25 @@
     $db = connectDB($DBHost, $DBUser, $DBPassword, $DBName);
     
     //query a students course list 
-    $query = "SELECT COURSE.COURSE_FRIENDLY FROM COURSE, ROLE_T WHERE ROLE_T.HAWKID = '$user' and COURSE.COURSE_ID = ROLE_T.COURSE_ID
-    and ROLE_T.DESCRIPTION = 'student';";
+    $query = "SELECT COURSE.COURSE_FRIENDLY, COURSE.COURSE_ID FROM COURSE, ROLE_T WHERE ROLE_T.HAWKID = '$user' and COURSE.COURSE_ID = ROLE_T.COURSE_ID
+    and ROLE_T.DESCRIPTION = 'student' and COURSE.COURSE_ID = ROLE_T.COURSE_ID;";
     
     //query a tutors approved list 
     $query_t = "SELECT COURSE.COURSE_FRIENDLY FROM COURSE, ROLE_T WHERE ROLE_T.HAWKID = '$user' and COURSE.COURSE_ID = ROLE_T.COURSE_ID
     and ROLE_T.DESCRIPTION = 'tutor';";
     
+    //query the available times for a students courses
+    $query_ts = "select COURSE.COURSE_ID,  USER_T.FIRST_NAME, USER_T.LAST_NAME, USER_T.EMAIL, TIME_SLOT.DATE_TIME,
+    TIME_SLOT.COURSE_ID
+    from USER_T, TIME_SLOT, COURSE, ROLE_T 
+    where USER_T.HAWKID = TIME_SLOT.HAWKID and ROLE_T.HAWKID = 'awolmutt' and
+    COURSE.COURSE_ID = ROLE_T.COURSE_ID and TIME_SLOT.COURSE_ID = ROLE_T.COURSE_ID and
+    TIME_SLOT.IS_BOOKED = 0 and ROLE_T.DESCRIPTION = 'student';";   
+    
+    
     $result = queryDB($query, $db);
     $result_t =  queryDB($query_t, $db);
-    
+    $result_ts = queryDB($query_ts, $db); 
 
     
     $course_list = array();
@@ -24,7 +33,7 @@
     while($row = nextTuple($result)){
         $course_list[$i] = $row;
         $course = $course_list[$i]['name'];
-        $i++;     
+        $i++;    
     }
     
     $course_list_t = array(); 
@@ -35,14 +44,34 @@
         $j++;     
     }
     
+    $times_list = array();
+    $k = 0; 
+    while($row_k = nextTuple($result_ts)){
+        $times_list[$k] = $row_k;
+        $times_ = $times_list[$k]['name'];
+        $k++; 
+    }
+    
+
+    
 
     
     //send the response
     $response = array();
     $response['status'] = 'success';
-    $response['user'] = $user; 
-    $response['value']['courses'] = $course_list;
-    $response['value']['courses_tutor'] = $course_list_t; 
+     
+    for($l = 0; $l < count($course_list); $l++) {
+        $response['value'][$l] = $course_list[$l];
+        for($m = 0; $m < count($times_list); $m++) {
+            if ($response['value'][$l]['COURSE_ID'] != $times_list[$m]['COURSE_ID']){
+                
+            }
+            else{
+                $response['value'][$l]['times'][$m] = $times_list[$m]; 
+            }
+        }
+    }
+    $response['user'] = $user;
     header('Content-Type: application/json');
     echo(json_encode($response));
    

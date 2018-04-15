@@ -7,7 +7,8 @@
     myApp.controller("dataControl", function($scope, $http, $window) {
         $http.get('php/getcourses.php')
             .then(function(response) {
-                $scope.data = response.data.value;
+                $scope.data = response.data;
+                console.log($scope.data.value.times); 
             }
 
             
@@ -15,6 +16,14 @@
         $scope.query = {};
         $scope.queryBy = "$";
         $scope.menuHighlight = 0;
+        
+        
+        
+        
+        
+        
+        
+        
         
         //Route the user to a landing page based on the account type in the response
         $scope.login = function(accountDetails) {
