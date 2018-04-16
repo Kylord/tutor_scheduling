@@ -46,24 +46,23 @@
          <td>{{j.FIRST_NAME}}</td>
          <td>{{j.LAST_NAME}}</td>
          <td>{{j.EMAIL}}</td>
-         <td><button type="button">Reserve slot</button></td>
+         <td><button type="button" ng-click = "reserveTimeSlot(j.DATE_TIME, j.SESSION_NO)">Reserve slot</button></td>
         </tr>
        </table>
       </div> 
      </div>
     </div>
+    <p></p>
+    <div class= "container">
+     <h3>Courses I tutor:</h3>
      
-
-
+     
+    </div>
     
-    <p> </p>
-    <table ng-controller= "dataControl" border=1>
-     <tr>Courses I tutor:</tr>
-      <tr ng-repeat ="j in data.courses_tutor">
-       <td><a ng-click = "click= !click">{{j.COURSE_FRIENDLY}}</a></td>
-        <td ng-show="click">a row </td>
-       </tr>
-    </table>
+    
+    
+    
+    
 </div> 
  </body>
 </html>

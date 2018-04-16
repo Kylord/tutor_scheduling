@@ -8,7 +8,7 @@
         $http.get('php/getcourses.php')
             .then(function(response) {
                 $scope.data = response.data;
-                console.log($scope.data.value.times); 
+                
             }
 
             
@@ -18,12 +18,7 @@
         $scope.menuHighlight = 0;
         
         
-        
-        
-        
-        
-        
-        
+     
         
         //Route the user to a landing page based on the account type in the response
         $scope.login = function(accountDetails) {
@@ -75,11 +70,29 @@
                }
             });                        
         };
-        $scope.storeCourse = function($e) {
-           var data = $e.innerText;
-           return data; 
+        
+        $scope.reserveTimeSlot = function(ts, id) {
+            if (confirm("Do want to book " + ts + "?")){
+                $http.post("php/reserveslot.php",{"ts_id": id})
+                .then(function (response){
+                    if (response.status == 200){
+                      alert("success");
+                      $window.location.reload(); 
+                    }
+                    else {
+                        alert('unexpected error'); 
+                        
+                    }
+                }); 
+            }
             
-        }; 
+           
+        };
+        
+        
+        
+        
+        
         
     });      
 } )();

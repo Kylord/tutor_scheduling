@@ -16,7 +16,7 @@
     
     //query the available times for a students courses
     $query_ts = "select COURSE.COURSE_ID,  USER_T.FIRST_NAME, USER_T.LAST_NAME, USER_T.EMAIL, TIME_SLOT.DATE_TIME,
-    TIME_SLOT.COURSE_ID
+    TIME_SLOT.COURSE_ID, TIME_SLOT.SESSION_NO
     from USER_T, TIME_SLOT, COURSE, ROLE_T 
     where USER_T.HAWKID = TIME_SLOT.HAWKID and ROLE_T.HAWKID = 'awolmutt' and
     COURSE.COURSE_ID = ROLE_T.COURSE_ID and TIME_SLOT.COURSE_ID = ROLE_T.COURSE_ID and
@@ -52,9 +52,6 @@
         $k++; 
     }
     
-
-    
-
     
     //send the response
     $response = array();
