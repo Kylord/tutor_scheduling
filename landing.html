@@ -29,9 +29,28 @@
    </ul>  
   </nav> 
 
-   <h3>Courses I'm Enrolled In: </h3>
+   
    <!-- The current users list of courses -->
+    
+    <h3>My upcoming tutoring sessions: </h3>
+    <div class="container">
+     <table border=3>
+     <tr ng-repeat = "i in data.current_sessions">
+      <td>{{i.DATE_TIME}}</td>
+      <td>{{i.COURSE_FRIENDLY}}</td>
+      <td>{{i.FIRST_NAME}}</td>
+      <td>{{i.LAST_NAME}}</td>
+      <td>{{i.EMAIL}}</td>
+      <td><button type="button">Cancel</button></td>
+     </tr>
+     
+     </table>
+     
+     
+    </div>
+
    <p></p>
+   <h3>Courses I'm Enrolled In: </h3>
     <div class= "container" ng-repeat="i in data.value">
      <h5>{{i.COURSE_FRIENDLY}}<input type="checkbox" ng-model="var"></h5>
       <table ng-show = "var" border=1>
@@ -50,14 +69,14 @@
         </tr>
        </table>
       </div> 
-     </div>
-    </div>
-    <p></p>
+
+    <p></p>    
+    <h3>Courses I tutor:</h3>
     <div class= "container">
-     <h3>Courses I tutor:</h3>
      
      
-    </div>
+     
+     </div>
     
     
     

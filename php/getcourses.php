@@ -20,12 +20,19 @@
     from USER_T, TIME_SLOT, COURSE, ROLE_T 
     where USER_T.HAWKID = TIME_SLOT.HAWKID and ROLE_T.HAWKID = 'awolmutt' and
     COURSE.COURSE_ID = ROLE_T.COURSE_ID and TIME_SLOT.COURSE_ID = ROLE_T.COURSE_ID and
-    TIME_SLOT.IS_BOOKED = 0 and ROLE_T.DESCRIPTION = 'student';";   
+    TIME_SLOT.IS_BOOKED = 0 and ROLE_T.DESCRIPTION = 'student';";
+    
+    $query_sess = "select COURSE.COURSE_FRIENDLY, TIME_SLOT.DATE_TIME, USER_T.FIRST_NAME,
+    USER_T.LAST_NAME, USER_T.EMAIL
+    from USER_T, TIME_SLOT, COURSE
+    where COURSE.COURSE_ID = TIME_SLOT.COURSE_ID and TIME_SLOT.STUDENT_HAWKID= '$user'
+    and USER_T.HAWKID = TIME_SLOT.HAWKID;";
     
     
     $result = queryDB($query, $db);
     $result_t =  queryDB($query_t, $db);
-    $result_ts = queryDB($query_ts, $db); 
+    $result_ts = queryDB($query_ts, $db);
+    $result_sess = queryDB($query_sess, $db); 
 
     
     $course_list = array();
@@ -52,6 +59,16 @@
         $k++; 
     }
     
+    $current_sessions = array();
+    $n = 0;
+    while($row_n = nextTuple($result_sess)){
+        $current_sessions[$n] = $row_n;
+        $sess_ = $times_list[$n]['name'];
+        $n++; 
+    }
+    
+    
+    
     
     //send the response
     $response = array();
@@ -69,6 +86,7 @@
         }
     }
     $response['user'] = $user;
+    $response['current_sessions'] = $current_sessions; 
     header('Content-Type: application/json');
     echo(json_encode($response));
    
