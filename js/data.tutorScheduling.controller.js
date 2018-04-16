@@ -86,8 +86,20 @@
                 }); 
             }
             
-           
         };
+        $scope.cancelTimeSlot = function(ts, id) {
+            if(confirm("Do you want to cancel " + ts + "?")){
+                $http.post("php/cancelslot.php", {"ts_id": id})
+                .then(function(response){
+                    if(response.status == 200){
+                        $window.location.reload(); 
+                    }
+                    else{
+                        alert('unexpected error'); 
+                    }
+                }); 
+            }
+        }; 
         
         
         

@@ -23,7 +23,7 @@
     TIME_SLOT.IS_BOOKED = 0 and ROLE_T.DESCRIPTION = 'student';";
     
     $query_sess = "select COURSE.COURSE_FRIENDLY, TIME_SLOT.DATE_TIME, USER_T.FIRST_NAME,
-    USER_T.LAST_NAME, USER_T.EMAIL
+    USER_T.LAST_NAME, USER_T.EMAIL, TIME_SLOT.SESSION_NO
     from USER_T, TIME_SLOT, COURSE
     where COURSE.COURSE_ID = TIME_SLOT.COURSE_ID and TIME_SLOT.STUDENT_HAWKID= '$user'
     and USER_T.HAWKID = TIME_SLOT.HAWKID;";
@@ -72,8 +72,7 @@
     
     //send the response
     $response = array();
-    $response['status'] = 'success';
-     
+    $response['status'] = 'success'; 
     for($l = 0; $l < count($course_list); $l++) {
         $response['value'][$l] = $course_list[$l];
         for($m = 0; $m < count($times_list); $m++) {
