@@ -16,7 +16,7 @@
   <script src="js/tutorScheduling.module.js"></script>
   <script src="js/data.tutorScheduling.controller.js"></script>
   <script src="js/tutorScheduling.filter.js"></script>
-   <script src="js/dataatutorScheduling.filter.js"></script>
+   <script src="js/dataAdmin.tutorScheduling.controller.js"></script>
 </head>
 
  <body>
@@ -29,6 +29,24 @@
   </nav> 
   <!-- BODY -->   
  <h1>This is the landing page for an admin</h1>
+     <h3>Users </h3>
+    <div class="container" ng-controller = "adminDataControl">
+     <table border=3>
+     <tr ng-repeat = "i in data.value.users">
+      <td>{{i.HAWKID}}</td>
+      <td>{{i.FIRST_NAME}}</td>
+      <td>{{i.LAST_NAME}}</td>
+      <td>{{i.EMAIL}}</td>
+      <td><button type="button">Edit</button></td>
+      <td><button type="button">Delete</button></td>
+     </tr>
+     </table>
+    </div>
+
+ 
+ 
+ 
+ 
     
  </body>
 </html>
